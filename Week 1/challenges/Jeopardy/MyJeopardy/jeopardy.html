@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy!</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="jeopardy.css">
+</head>
+
+<body>
+    <div class="text-center" class="jumbotron">
+        <h1 class="display-4"><strong>Jeopardy</strong></h1>
+        <a href="https://github.com/sottenad/jService"> <img src="./imgs/trivia.png"
+                alt="jService 156,800 Trivia Questions"></a>
+        <hr class="my-4">
+
+        <h1 id="category"></h1>
+
+        <p id="answer"></p>
+
+        <div id="qdiv">
+            <p id="question"></p>
+        </div>
+
+        <button id="reveal">Reveal Answer</button>
+        <button id="next">Retrieve a new Question</button>
+    </div>
+    <script type="text/javascript" src="jeopardy.js"></script>
+</body>
+
+</html>
