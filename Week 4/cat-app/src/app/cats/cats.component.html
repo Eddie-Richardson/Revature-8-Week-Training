@@ -1,0 +1,40 @@
+<h2>My Cats</h2>
+
+<div>
+
+    <label for="new-cat">Cat name:</label>
+    <input id="new-cat" #catName>
+
+    <button class="add-button" (click)="add(catName.value)">Add Cat</button>
+
+
+</div>
+
+
+
+
+<ul class = "cats">
+    <!-- NgFor is a structural directive -- meaning that it changes the strcuture of the dom
+    
+    ngFor allows us to create something similar to an enhanced loop, but strcuturally
+
+        We typically use NgFor for lists-->
+
+    <!-- by adding something like [class.some-css-class] I am adding CSS conditionally -->
+    <li *ngFor="let myCat of allCats">
+
+        <a routerLink = "/detail/{{myCat.id}}"> 
+        
+            <span class="box">{{ myCat.id }}</span> {{ myCat.name }} </a>
+            <!-- Shout out to Jesus L. for catching this! You must select "myCat" because that's 
+            what we refer to each element as in the directive. -->
+            <button class="delete" title="Delete Cat" (click)="delete(myCat)">X</button>
+    </li>
+
+</ul>
+
+<!-- Here we had some code which we allocated to a separate component....-->
+
+<!-- this is property binding! -->
+<!-- We are no longer capturing a cat from input, but rather extracting it from the query parameter
+    <app-cat-detail [cat] = "selectedCat"></app-cat-detail> -->

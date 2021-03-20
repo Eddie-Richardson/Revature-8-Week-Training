@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>View Denied Tickets</title>
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<div class="jumbotron" align="center">
+		<h1 id="welcome">You are Logged in!</h1>
+
+		<a class="btn btn success" onclick="logout()">Logout</a>
+
+	</div>
+
+	<table id="myTable" style="width: 100%" class="table table-dark">
+		<tr>
+			<th scope="col">Id</th>
+			<th scope="col">Amount</th>
+			<th scope="col">Submitted</th>
+			<th scope="col">Resolved</th>
+			<th scope="col">Description</th>
+			<th scope="col">Receipt</th>
+			<th scope="col">Author Id</th>
+			<th scope="col">Resolver Id</th>
+			<th scope="col">Status Id</th>
+			<th scope="col">Type ID</th>
+		</tr>
+	</table>
+
+
+	<script>
+		
+	let welcome = document.getElementById('welcome');
+
+	let userString = sessionStorage.getItem('currentUser');
+	
+	let viewDeniedString = sessionStorage.getItem('viewdenied');
+	
+	if (userString === null) {
+		window.location = "http://localhost:8080/EmployeeReimbursementSystem/";
+	} else {
+		
+		let currentUser = JSON.parse(userString); 
+		
+		var viewDenied = JSON.parse(viewDeniedString); 
+		
+		console.log(currentUser);
+		console.log(viewDenied);
+		
+		if (currentUser != null) {
+			
+			welcome.innerHTML = "Welcome " + currentUser.firstName + " " + currentUser.lastName;
+			
+		}
+		
+	}
+	
+	function createTable() {
+
+	    var table = document.getElementById("myTable");
+
+	    viewDenied.forEach( (obj) => {
+
+	        // 1. for each object create a new row (<tr>) and stick it onto (append) the table that exists
+	        let tr = document.createElement("tr");
+	        table.appendChild(tr);
+
+	        // 2. for each obj enter some data (<td>)
+	        let td = document.createElement("td");
+	            
+	            tr.appendChild(td);
+	            td.innerHTML = obj.id;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.amount;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.submitted;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.resolved;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.description;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.receipt;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.authorId;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.resolverId;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.statusId;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = obj.typeId;
+	        });
+	}
+	window.onload = createTable(viewDenied)
+
+	</script>
+
+	<script src="scripts/index.js"></script>
+
+
+
+</body>
+</html>

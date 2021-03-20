@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>User Profile</title>
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<div class="jumbotron" align="center">
+		<h1 id="welcome">You are Logged in!</h1>
+
+		<a class="btn btn success" onclick="logout()">Logout</a>
+
+	</div>
+
+	<table id="myTable" style="width: 100%" class="table table-dark">
+		<tr>
+			<th scope="col">Id</th>
+			<th scope="col">Username</th>
+			<th scope="col">password</th>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
+			<th scope="col">E-mail</th>
+			<th scope="col">Role Id</th>
+		</tr>
+	</table>
+	
+	<div align="center">
+
+	<form name="loginForm"
+		onsubmit="sendUserUpdate(event.preventDefault())">
+
+
+		<div class="form-group">
+			<p>
+				<label for="updateColumn">What do you want to update?</label> <select
+					name="updateColumn" " id="updateColumn"">
+					<option value="">Please make a selection</option>
+					<option value="ers_username">Username</option>
+					<option value="ers_password">Password</option>
+					<option value="user_first_name">First Name</option>
+					<option value="user_last_name">Last Name</option>
+					<option value="user_email">E-mail</option>
+				</select>
+			</p>
+		</div>
+
+		<div class="form-group" style="max-width: 300px; font-weight: bold;">
+			<label for="updateInfo">New Information</label> <input type="text"
+				class="form-control" name="updateInfo" id="updateInfo"
+				placeholder="Enter New Information">
+		</div>
+		<div id="warningText"></div>
+
+		<button type="submit" class="btn btn-primary">Submit</button>
+
+	</form>
+	</div>
+
+
+	<script>
+		
+	let welcome = document.getElementById('welcome');
+
+	let userString = sessionStorage.getItem('currentUser');
+	
+	let viewMyInfoString = sessionStorage.getItem('viewmyinfo');
+	
+	if (userString === null) {
+		window.location = "http://localhost:8080/EmployeeReimbursementSystem/";
+	} else {
+		
+		let currentUser = JSON.parse(userString); 
+		
+		var viewMyInfo = JSON.parse(viewMyInfoString); 
+		
+		console.log(currentUser);
+		
+		if (currentUser != null) {
+			
+			welcome.innerHTML = "Welcome " + currentUser.firstName + " " + currentUser.lastName;
+			
+		}
+		
+	}
+	
+	function createTable() {
+
+	    var table = document.getElementById("myTable");
+
+
+	        // 1. for each object create a new row (<tr>) and stick it onto (append) the table that exists
+	        let tr = document.createElement("tr");
+	        table.appendChild(tr);
+
+	        // 2. for each obj enter some data (<td>)
+	        let td = document.createElement("td");
+	            
+	            tr.appendChild(td);
+	            td.innerHTML = viewMyInfo.id;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = viewMyInfo.username;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = viewMyInfo.password;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = viewMyInfo.firstName;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = viewMyInfo.lastName;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = viewMyInfo.userEmail;
+	            td = document.createElement("td");
+	            tr.appendChild(td);
+	            td.innerHTML = viewMyInfo.roleId;
+	}
+	window.onload = createTable(viewMyInfo)
+
+	</script>
+
+	<script src="scripts/index.js"></script>
+
+
+
+</body>
+</html>

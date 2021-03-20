@@ -9,6 +9,7 @@ function retrieveQuestion() {
     var c = document.getElementById("category");
     var q = document.getElementById("question");
     var a = document.getElementById("answer");
+    var v = document.getElementById("value");
     c.innerHTML = "Loading";
 
     a.innerHTML = "Loading";
@@ -21,7 +22,7 @@ function retrieveQuestion() {
         c.innerHTML = data[0].category.title;
         q.innerHTML = data[0].answer;
         a.innerHTML = data[0].question;
-
+        v.innerHTML = data[0].value
     })
 }
 
